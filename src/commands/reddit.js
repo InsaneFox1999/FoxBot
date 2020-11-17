@@ -32,11 +32,12 @@ const remappings = {
 }
 
 module.exports = {
-    name: 'funny',
-    description: 'funny',
-    async execute(message, args, subreddit) {
+    name: 'reddit',
+    description: 'random reddit post',
+    async execute(message, args) {
         if (message.channel.id !== '775514887370702858') return;
 
+        let subreddit = args.shift();
         if (!subreddit) {
             await message.channel.send("😕 Usage: !reddit <subreddit> 🤦");
             return;
@@ -72,7 +73,9 @@ module.exports = {
                 if (isImage) {
                     embed.setImage(postData.url);
                 } else {
-                    embed.setThumbnail(postData.thumbnail);
+                    if (postData.thumbnail !== "self") {
+                        embed.setThumbnail(postData.thumbnail);
+                    }
                     embed.setDescription("__ \n ⬆️ Click to view the post ⬆️ \n __");
                 }
 

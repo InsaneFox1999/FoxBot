@@ -1,20 +1,9 @@
 import Discord = require('discord.js');
 const client = new Discord.Client();
 
-/*
-import fs = require('fs');
-//client.commands = new Discord.Collection();
-
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-    //client.commands.set(command.name, command);
-}
-*/
-
 // Module
 import welcome = require('./functions/welcome');
-import _commands = require('./functions/commands');
+import { loadCommands } from './functions/commands';
 import coleClaim = require('./functions/role-claim');
 // ModuleCreateChannel
 import _createchannelstreaming = require('./functions/createchannels/streaming');
@@ -27,12 +16,14 @@ import _createchanneljustchatting = require('./functions/createchannels/justchat
 import _createchannelvip = require('./functions/createchannels/vip');
 import _createchannelother = require('./functions/createchannels/other');
 
-// Start Bot and load Modules
-client.once('ready', () => {
+client.login('***REMOVED***');
+
+client.on('ready', () => {
+    // Start Bot and load Modules
     console.log('FoxBot is online!');
 
     welcome(client);
-    _commands(client);
+    loadCommands(client);
     coleClaim(client);
     _createchannelstreaming(client);
     _createchannelvalorant(client);
@@ -44,8 +35,3 @@ client.once('ready', () => {
     _createchannellol(client);
     _createchannelvip(client);
 });
-
-
-
-
-client.login('***REMOVED***');

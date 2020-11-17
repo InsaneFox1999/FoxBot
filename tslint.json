@@ -34,7 +34,11 @@
 		"no-unused-expression": true,
 		"no-duplicate-variable": true,
 		"ordered-imports": false,
-		"curly": true,
+		"curly": [
+			true,
+			"ignore-same-line"
+		],
+		"no-var-requires": false,
 		"class-name": true,
 		"semicolon": [
 			true,
