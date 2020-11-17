@@ -9,6 +9,7 @@
   "author": "InsaneFox",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.4.1"
+    "discord.js": "^12.4.1",
+    "got": "^11.8.0"
   }
 }
