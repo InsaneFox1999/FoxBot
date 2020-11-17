@@ -32,7 +32,7 @@ module.exports = client => {
         } else if (command === 'clear') {
             clearChannels.execute(message, args);
         }
-    
+        
     });
   
 }

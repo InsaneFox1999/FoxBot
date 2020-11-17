@@ -2,14 +2,28 @@
   "name": "foxbot",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "out/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "prestart": "npm run compile",
+    "start": "node ."
   },
   "author": "InsaneFox",
   "license": "ISC",
+  "engines": {
+    "node": "*"
+  },
+  "devDependencies": {
+    "tslint": "^6.1.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.8.3"
+  },
   "dependencies": {
+    "@types/fs-extra": "^9.0.4",
+    "@types/ws": "^7.4.0",
     "discord.js": "^12.4.1",
+    "fs-extra": "^9.0.1",
     "got": "^11.8.0"
   }
 }
