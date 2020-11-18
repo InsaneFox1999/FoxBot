@@ -1,6 +1,5 @@
-import { Client, GuildEmoji, GuildMember, Role, TextChannel } from "discord.js";
+import { Client, EmojiResolvable, GuildEmoji, GuildMember, Message, Role, TextChannel } from "discord.js";
 
-import firstMessage from './firstmessage';
 const serverID = '767139170350792704';
 const roleClaimChannelID = '767140016676798524';
 
@@ -28,15 +27,15 @@ export function handleRoleClaims(client: Client) {
     type RoleEntry = { emoji: GuildEmoji, role: Role };
     const resolvedEmojis: RoleEntry[] = emojis
         .map(([emojiName, roleName]) => ({
-            emoji: client.emojis.resolve(emojiName)!,
-            role: guild.roles.resolve(roleName)!,
+            emoji: guild.emojis.cache.find(emoji => emoji.name === emojiName)!,
+            role: guild.roles.cache.find(role => role.name === roleName)!,
         }));
     const optionsText = resolvedEmojis
         .map(roleEntry => `${roleEntry.emoji} = ${roleEntry.role}`)
         .join("\n");
     const emojiText = `Use the reactions on this message to opt-in and out of roles.\n\n${optionsText}`;
 
-    firstMessage(roleClaimChannel, emojiText, resolvedEmojis.map(x => x.emoji));
+    ensureNthMessage(roleClaimChannel, 0, emojiText, resolvedEmojis.map(x => x.emoji));
 
     function registerHandler(
         event: string,
@@ -58,4 +57,25 @@ export function handleRoleClaims(client: Client) {
 
     registerHandler('messageReactionAdd', (member, role) => member.roles.add(role));
     registerHandler('messageReactionRemove', (member, role) => member.roles.remove(role));
+}
+
+async function ensureNthMessage(channel: TextChannel, n: number, text: string, reactions: GuildEmoji[] = []) {
+    const messages = await channel.messages.fetch();
+    let message: Message;
+
+    if (messages.size <= n) {
+        message = await channel.send(text);
+    } else {
+        message = messages.array()[n];
+        message.edit(text);
+    }
+
+    addReactions(message, reactions);
+}
+
+function addReactions(message: Message, reactions: EmojiResolvable[]) {
+    const reaction = reactions.shift();
+    if (reaction === undefined) return;
+    message.react(reaction);
+    setTimeout(() => addReactions(message, reactions), 750);
 }
