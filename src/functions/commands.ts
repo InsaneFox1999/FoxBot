@@ -1,14 +1,16 @@
 import { Client, Message } from 'discord.js';
 import fs = require('fs');
-const commands: { [name: string]: (message: Message, args: string[]) => void } = {};
+
+type Command = (message: Message, args: string[]) => void;
+const commands: Map<string, Command> = new Map();
 
 const commandsFolder = `${__dirname}/../commands`;
 const commandFiles = fs.readdirSync(commandsFolder)
     .filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
     const command = require(`${commandsFolder}/${file}`);
-    console.log(command);
-    commands[command.name] = command.execute;
+    const commandName = file.slice(0, -3);
+    commands.set(commandName, command.execute);
 }
 
 const prefix = '!';
@@ -20,8 +22,13 @@ export function loadCommands(client: Client) {
         const args = message.content.slice(prefix.length).split(/ +/);
         const commandName = args.shift();
         if (commandName === undefined) return;
-        const command = commands[commandName.toLowerCase()];
+        const command = commands.get(commandName.toLowerCase());
         if (command === undefined) return;
-        command(message, args);
+        try {
+            command(message, args);
+        } catch (error) {
+            console.log(`error executing command for message '${message}'`);
+            console.log(error);
+        }
     });
 }
