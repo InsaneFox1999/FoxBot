@@ -10,10 +10,10 @@ const client = new Client();
 client.login('***REMOVED***');
 
 client.on('ready', () => {
-    console.log('FoxBot is online!');
+	console.log('FoxBot is online!');
 
-    handleWelcomes(client);
-    loadCommands(client);
-    handleRoleClaims(client);
-    handleVoiceChannels(client);
+	handleWelcomes(client);
+	loadCommands(client);
+	handleRoleClaims(client);
+	handleVoiceChannels(client);
 });
