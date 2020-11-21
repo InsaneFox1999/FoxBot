@@ -1,16 +1,5 @@
 import { Client, Guild, GuildChannel, GuildMember } from "discord.js";
-
-const creationChannelIDs = [
-	'775504295868104784', // among us
-	'775504307822133297', // just chatting
-	'775920970338402314', // lol
-	'775504281691226122', // minecraft
-	'775504319755452426', // other
-	'775682208735690762', // rocket league
-	'775511588073504799', // streaming
-	'775504236480954368', // valorant
-	'775990776307384360', // vip
-];
+import { channelIDs } from "../config";
 
 export function handleVoiceChannels(client: Client) {
 	client.on("voiceStateUpdate", async (oldState, newState) => {
@@ -22,12 +11,12 @@ export function handleVoiceChannels(client: Client) {
 
 		if (oldChannel?.id === newChannel?.id) return;
 
-		if (newChannel !== null && creationChannelIDs.includes(newChannel.id)) {
+		if (newChannel !== null && channelIDs.voiceChannelCreation.includes(newChannel.id)) {
 			newState.setChannel(await createNewChannel(guild, member, newChannel));
 		}
 
 		if (oldChannel !== null && oldChannel.members.size === 0) {
-			const creationChannels = creationChannelIDs.map(id => guild.channels.resolve(id)!);
+			const creationChannels = channelIDs.voiceChannelCreation.map(id => guild.channels.resolve(id)!);
 			const shouldDeleteChannel = creationChannels.some(creationChannel => true
 				&& creationChannel.id !== oldChannel.id
 				&& creationChannel.parentID === oldChannel.parentID

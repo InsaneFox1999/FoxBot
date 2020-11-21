@@ -1,7 +1,8 @@
 import { Message } from "discord.js";
+import { channelIDs } from "../config";
 
 export async function execute(message: Message, args: string[]) {
-	if (message.channel.id !== '775514641207525376') return;
+	if (message.channel.id !== channelIDs.trashTalk) return;
 
 	const numberArg = args.shift();
 	if (numberArg !== undefined) {

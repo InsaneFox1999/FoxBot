@@ -38,6 +38,7 @@
 			true,
 			"ignore-same-line"
 		],
+		"max-classes-per-file": false,
 		"no-var-requires": false,
 		"class-name": true,
 		"semicolon": [

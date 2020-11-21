@@ -1,5 +1,6 @@
 import { Message, MessageEmbed } from "discord.js";
 import got from "got/dist/source";
+import { channelIDs } from "../config";
 
 const blacklist = [
 	"porn", "gayporn", "lesbianporn", "schwulporn",
@@ -32,7 +33,7 @@ const remappings: Map<string, string> = new Map([
 ]);
 
 export async function execute(message: Message, args: string[]) {
-	if (message.channel.id !== '775514887370702858') return;
+	if (message.channel.id !== channelIDs.memes) return;
 
 	let subreddit = args.shift();
 	if (subreddit === undefined) {

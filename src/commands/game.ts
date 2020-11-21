@@ -1,13 +1,8 @@
 import { Message } from "discord.js";
-
-const channelIDs = [
-	'776461040254713856', // #normal-search
-	'776461062756892722', // #team-search
-	'776461088728154172', // #other
-];
+import { channelIDs } from "../config";
 
 export async function execute(message: Message, args: string[]) {
-	if (!channelIDs.includes(message.channel.id)) return;
+	if (!channelIDs.searchChannels.includes(message.channel.id)) return;
 
 	if (message.guild === null) return;
 	const member = message.guild.member(message.author)!;
