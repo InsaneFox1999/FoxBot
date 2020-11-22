@@ -29,14 +29,12 @@ function writeLogFile<T>(prefix: string, contents: T) {
 process.on('unhandledRejection', (error, _promise) => {
 	console.log("unhandled rejection! D:");
 	console.dir(error);
-	writeLogFile('unhandledRejection', {
-		error
-	});
+	writeLogFile('unhandledRejection', error);
 });
 
 process.on('uncaughtException', (error) => {
 	console.log("uncaught exception! D:");
-	console.log(error);
+	console.dir(error);
 	writeLogFile('uncaughtException', {
 		error, errorString: error.toString(), stack: error.stack
 	});
