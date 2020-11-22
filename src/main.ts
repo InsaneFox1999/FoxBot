@@ -18,8 +18,6 @@ client.on('ready', () => {
 	loadCommands(client);
 	handleRoleClaims(client);
 	handleVoiceChannels(client);
-
-	throw { reason: "oh no!" };
 });
 
 function writeLogFile<T>(prefix: string, contents: T) {
