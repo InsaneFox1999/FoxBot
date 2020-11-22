@@ -7,7 +7,7 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "prestart": "npm run compile",
-    "start": "node ."
+    "start": "node --trace-warnings ."
   },
   "author": "InsaneFox",
   "license": "ISC",
