@@ -1,12 +1,12 @@
 import { Client } from 'discord.js';
+import * as fs from 'fs-extra';
+import * as path from 'path';
 
 import { token } from './config';
 import { handleWelcomes } from './functions/welcome';
 import { loadCommands } from './functions/commands';
 import { handleVoiceChannels } from './functions/voice';
 import { handleRoleClaims } from './functions/role-claim';
-import * as fs from 'fs-extra';
-import * as path from 'path';
 
 const client = new Client();
 client.login(token);
