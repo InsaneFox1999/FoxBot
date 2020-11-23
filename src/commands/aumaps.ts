@@ -1,4 +1,5 @@
 import { Message } from "discord.js";
+
 import { channelIDs } from "../config";
 
 export async function execute(message: Message, args: string[]) {

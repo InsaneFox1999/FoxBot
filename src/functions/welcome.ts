@@ -1,4 +1,5 @@
 import { Client, TextChannel } from "discord.js";
+
 import { channelIDs, serverID } from "../config";
 
 export function handleWelcomes(client: Client) {

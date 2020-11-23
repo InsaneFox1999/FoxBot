@@ -1,5 +1,6 @@
 import { Message, MessageEmbed } from "discord.js";
 import got from "got/dist/source";
+
 import { channelIDs } from "../config";
 
 const blacklist = [

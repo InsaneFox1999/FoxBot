@@ -1,6 +1,8 @@
 import { Client, Message } from 'discord.js';
 import fs = require('fs');
 
+import { prefix } from '../config';
+
 type Command = (message: Message, args: string[]) => void;
 const commands: Map<string, Command> = new Map();
 
@@ -12,8 +14,6 @@ for (const file of commandFiles) {
 	const commandName = file.slice(0, -3);
 	commands.set(commandName, command.execute);
 }
-
-const prefix = '!';
 
 export function loadCommands(client: Client) {
 	client.on('message', message => {

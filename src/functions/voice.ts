@@ -1,4 +1,5 @@
 import { Client, Guild, GuildChannel, GuildMember } from "discord.js";
+
 import { channelIDs } from "../config";
 
 export function handleVoiceChannels(client: Client) {

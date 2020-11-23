@@ -1,4 +1,5 @@
 export const serverID = '767139170350792704';
+export const prefix = '!';
 
 export const channelIDs = {
 	welcome: '775549595002077184',
