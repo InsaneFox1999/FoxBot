@@ -2,14 +2,23 @@ import { Client } from 'discord.js';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
-import { token } from './config';
 import { handleWelcomes } from './functions/welcome';
 import { loadCommands } from './functions/commands';
 import { handleVoiceChannels } from './functions/voice';
 import { handleRoleClaims } from './functions/role-claim';
 
 const client = new Client();
-client.login(token);
+
+const token = fs.readFileSync("bot-token").toString().trim();
+if (token.length === 0) {
+	console.log(`no valid token provided in the bot-token file!`);
+}
+
+client.login(token).catch(error => {
+	console.log("could not log into discord API:");
+	console.dir(error);
+	writeLogFile('loginError', error);
+});
 
 client.on('ready', () => {
 	console.log('FoxBot is online!');

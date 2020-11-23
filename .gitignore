@@ -1,3 +1,6 @@
 /node_modules/
 /out/
 /log/
+.gitsecret/keys/random_seed
+!*.secret
+bot-token

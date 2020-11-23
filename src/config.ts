@@ -24,5 +24,3 @@ export const channelIDs = {
 		'775990776307384360', // vip
 	],
 };
-
-export const token = '***REMOVED***';
