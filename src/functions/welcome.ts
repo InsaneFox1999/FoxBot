@@ -1,5 +1,4 @@
 import { Client, TextChannel } from "discord.js";
-
 import { channelIDs, serverID } from "../config";
 
 export function handleWelcomes(client: Client) {
@@ -18,7 +17,6 @@ export function handleWelcomes(client: Client) {
 
 		updateUserCount();
 	});
-
 
 	client.on('guildMemberRemove', member => {
 		const farewellMessage = `${member} left the Server! 👋`;

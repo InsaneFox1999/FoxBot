@@ -1,6 +1,8 @@
 export const serverID = '767139170350792704';
 export const commandPrefix = '!';
 
+export const adminRoleName = "Administrator";
+
 export const channelIDs = {
 	welcome: '775549595002077184',
 	userCount: '775509982636540014',

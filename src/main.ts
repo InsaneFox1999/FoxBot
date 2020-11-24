@@ -1,7 +1,6 @@
 import { Client } from 'discord.js';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-
 import { handleWelcomes } from './functions/welcome';
 import { loadCommands } from './functions/commands';
 import { handleVoiceChannels } from './functions/voice';

@@ -1,17 +1,15 @@
 import { Message } from "discord.js";
+import { checkForAdminRights } from "../common";
 
 export async function execute(message: Message, args: string[]) {
-	// Checkt ob Rank vorhanden
-	if (message.member === null) return;
-	const isAdmin = message.member.roles.cache.some(role => role.name === "Administrator");
-	if (!isAdmin) return;
+	if (!checkForAdminRights(message)) return;
 
 	const countArg = args.shift();
 	if (countArg === undefined) {
 		message.channel.send("😕 Usage: !clear <1-100> 🤦");
 		return;
 	}
-	const count = Math.min(parseInt(countArg, 10) ?? 100, 100);
+	const count = Math.min(parseInt(countArg, 10) ?? 1, 100);
 
 	if (message.channel.type !== "text") return;
 

@@ -1,5 +1,4 @@
 import { Client, GuildEmoji, GuildMember, Message, MessageEmbed, Role, TextChannel } from "discord.js";
-
 import { delay } from "../common";
 import { channelIDs, serverID } from "../config";
 
@@ -82,7 +81,7 @@ export async function handleRoleClaims(client: Client) {
 		await delay(100);
 	}
 
-	const flatEntries = Array<RoleEntry>().concat(...resolvedEntries);
+	const flatEntries = resolvedEntries.flat();
 
 	function registerHandler(
 		event: string,
