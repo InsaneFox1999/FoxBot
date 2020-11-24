@@ -1,7 +1,7 @@
 import { Client, Message } from 'discord.js';
 import fs = require('fs');
 
-import { prefix } from '../config';
+import { commandPrefix } from '../config';
 
 type Command = (message: Message, args: string[]) => void;
 const commands: Map<string, Command> = new Map();
@@ -17,9 +17,9 @@ for (const file of commandFiles) {
 
 export function loadCommands(client: Client) {
 	client.on('message', message => {
-		if (!message.content.startsWith(prefix) || message.author.bot) return;
+		if (!message.content.startsWith(commandPrefix) || message.author.bot) return;
 
-		const args = message.content.slice(prefix.length).split(/ +/);
+		const args = message.content.slice(commandPrefix.length).split(/ +/);
 		const commandName = args.shift();
 		if (commandName === undefined) return;
 		const command = commands.get(commandName.toLowerCase());
