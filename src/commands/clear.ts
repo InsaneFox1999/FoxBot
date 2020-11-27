@@ -1,8 +1,13 @@
 import { Message } from "discord.js";
-import { checkForAdminRights } from "../common";
+import { checkForAdminRights, sendLogMessage } from "../common";
+import { channelIDs } from "../config";
 
 export async function execute(message: Message, args: string[]) {
 	if (!checkForAdminRights(message)) return;
+	if (message.channel.id === channelIDs.botLog) {
+		sendLogMessage(`nice try 🙄`);
+		return;
+	}
 
 	const countArg = args.shift();
 	if (countArg === undefined) {
@@ -13,6 +18,11 @@ export async function execute(message: Message, args: string[]) {
 
 	if (message.channel.type !== "text") return;
 
-	await message.delete();
-	await message.channel.bulkDelete(count);
+	try {
+		await message.delete();
+		await message.channel.bulkDelete(count);
+	} catch (error) {
+		console.log(`failed to delete messages for clear command ${message}`);
+		console.dir(error);
+	}
 }

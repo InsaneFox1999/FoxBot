@@ -1,17 +1,23 @@
-import { Client } from 'discord.js';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import { client, sendLogMessage } from './common';
 import { handleWelcomes } from './functions/welcome';
 import { loadCommands } from './functions/commands';
 import { handleVoiceChannels } from './functions/voice';
 import { handleRoleClaims } from './functions/role-claim';
 
-const client = new Client();
-
 const token = fs.readFileSync("bot-token").toString().trim();
 if (token.length === 0) {
 	console.log(`no valid token provided in the bot-token file!`);
 }
+
+const consoleLog = console.log;
+// tslint:disable-next-line: no-any
+console.log = (message?: any, ...optionalParams: any[]) => {
+	consoleLog("replaced thingy");
+	sendLogMessage(`${message} ${optionalParams}`);
+	consoleLog(message, ...optionalParams);
+};
 
 client.login(token).catch(error => {
 	console.log("could not log into discord API:");

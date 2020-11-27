@@ -2,7 +2,7 @@
   "name": "foxbot",
   "version": "1.0.0",
   "description": "",
-  "main": "out/main.js",
+  "main": "out/bot.js",
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
